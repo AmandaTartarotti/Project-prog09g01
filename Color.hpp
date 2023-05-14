@@ -7,10 +7,15 @@ namespace prog
   class Color
   {
     private:
-      rgb_value r_;
-      rgb_value g_;
-      rgb_value b_;
+      rgb_value r;
+      rgb_value g;
+      rgb_value b;
     public:
+      static const Color RED;
+      static const Color GREEN;
+      static const Color BLUE;
+      static const Color BLACK;
+      static const Color WHITE;
       Color();
       Color(const Color& c);
       Color(rgb_value r, rgb_value g, rgb_value b);
