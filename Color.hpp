@@ -31,6 +31,7 @@ namespace prog
     Color &operator=(const Color &c);
     bool operator==(const Color &c) const;
     bool operator!=(const Color &c) const;
+    void replace();
   };
 }
 #endif

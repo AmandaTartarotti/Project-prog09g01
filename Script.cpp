@@ -56,6 +56,11 @@ namespace prog {
                 to_gray_scale();
                 continue;
             }
+            else if(command == "replace") {
+                replace();
+                continue;
+            }
+            
             // TODO ...
 
         }
@@ -88,5 +93,14 @@ namespace prog {
 
     void Script::to_gray_scale() {
         image->to_gray_scale();
+    }
+
+    void Script::replace() {
+        int r1, g1, b1, r2, g2, b2;
+        input >> r1 >> g1 >> b1 >> r2 >> g2 >> b2;
+        Color a, b;
+        a.red() = r1, a.green() = g1, a.blue() = b1;
+        b.red() = r2, b.green() = g2, b.blue() = b2;
+        image->replace(a, b);
     }
 }
