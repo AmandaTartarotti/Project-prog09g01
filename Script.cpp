@@ -92,6 +92,21 @@ namespace prog
                 add();
                 continue;
             }
+            else if (command == "crop")
+            {
+                crop();
+                continue;
+            }
+            else if (command == "rotate_left")
+            {
+                rotate_left();
+                continue;
+            }
+            else if (command == "rotate_right")
+            {
+                rotate_right();
+                continue;
+            }
 
             // TODO ...
         }
@@ -168,6 +183,21 @@ namespace prog
         Color neutral;
         neutral.red() = r, neutral.green() = g, neutral.blue() = b;
         image->add(img2, neutral, x, y);
+    }
+
+    void Script::crop()
+    {
+        
+    }
+
+    void Script::rotate_left()
+    {
+        image->rotate_left();
+    }
+
+    void Script::rotate_right()
+    {
+        image->rotate_right();
     }
 
 }

@@ -153,5 +153,100 @@ void Image::add(const Image& img, const Color& neutral, int x, int y)
         }
     }
 
+void Image::crop(int x, int y, int w, int h){
+  
+  // Create a new temporary array for the cropped image
+  Color **croppedPixels = new Color *[w];
+
+  for (int i = 0; i < w; i++){
+    croppedPixels[i] = new Color[h];
+  }
+
+  // Copy the pixels within the specified crop area to the temporary array
+  for (int i = 0; i < w; i++){
+    for (int j = 0; j < h; j++){
+      croppedPixels[i][j] = pixels[x + i][y + j];
+    }
+  }
+
+  // Deallocate the memory of the original image
+  for (int i = 0; i < width_; i++){
+    delete[] pixels[i];
+  }
+  delete[] pixels;
+
+  // Update the width and height of the image
+  width_ = w;
+  height_ = h;
+
+  // Assign the cropped pixels to the image
+  pixels = croppedPixels;
+}
+
+void Image::rotate_left(){
+  
+  // Create a new temporary array for the rotated image
+  Color **rotatedPixels = new Color *[height_];
+
+  for (int i = 0; i < height_; i++){
+    rotatedPixels[i] = new Color[width_];
+  }
+
+  // Perform the rotation by copying the pixels in the desired order
+  for (int i = 0; i < width_; i++)
+  {
+    for (int j = 0; j < height_; j++){
+      rotatedPixels[height_ - 1 - j][i] = pixels[i][j];
+    }
+  }
+
+  // Deallocate the memory of the original image
+  for (int i = 0; i < width_; i++){
+    delete[] pixels[i];
+  }
+
+  delete[] pixels;
+
+  // Update the width and height of the image
+  int temp = width_;
+  width_ = height_;
+  height_ = temp;
+
+  // Assign the rotated pixels to the image
+  pixels = rotatedPixels;
+}
+
+void Image::rotate_right(){
+
+  // Create a new temporary array for the rotated image
+  Color **rotatedPixels = new Color *[height_];
+
+  for (int i = 0; i < height_; i++){
+    rotatedPixels[i] = new Color[width_];
+  }
+
+  // Perform the rotation by copying the pixels in the desired order
+  for (int i = 0; i < width_; i++)
+  {
+    for (int j = 0; j < height_; j++){
+      rotatedPixels[j][width_ - 1 - i] = pixels[i][j];
+    }
+  }
+
+  // Deallocate the memory of the original image
+  for (int i = 0; i < width_; i++){
+    delete[] pixels[i];
+  }
+
+  delete[] pixels;
+
+  // Update the width and height of the image
+  int temp = width_;
+  width_ = height_;
+  height_ = temp;
+
+  // Assign the rotated pixels to the image
+  pixels = rotatedPixels;
+}
 
 }
