@@ -9,7 +9,8 @@ namespace prog
   private:
     int width_;
     int height_;
-    Color **pixels_; //as we need to hold a 2D matrix of colors
+    Color **pixels;
+
   public:
     Image(int w, int h, const Color &fill = {255, 255, 255});
     ~Image();
@@ -17,6 +18,9 @@ namespace prog
     int height() const;
     Color &at(int x, int y);
     const Color &at(int x, int y) const;
+    void invert();
+    void to_gray_scale();
+    void replace(const Color& a, const Color& b);
   };
 }
 #endif

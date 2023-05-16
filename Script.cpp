@@ -48,6 +48,14 @@ namespace prog {
                 save();
                 continue;
             } 
+            else if (command == "invert") {
+                invert();
+                continue;
+            }
+            else if(command == "to_gray_scale") {
+                to_gray_scale();
+                continue;
+            }
             // TODO ...
 
         }
@@ -72,5 +80,13 @@ namespace prog {
         string filename;
         input >> filename;
         saveToPNG(filename, image);
+    }
+
+    void Script::invert() {
+        image->invert();
+    }
+
+    void Script::to_gray_scale() {
+        image->to_gray_scale();
     }
 }
