@@ -187,7 +187,8 @@ namespace prog
 
     void Script::crop()
     {
-        
+        int x, y, w, h;
+        image->crop(x, y, w, h);
     }
 
     void Script::rotate_left()
