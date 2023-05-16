@@ -62,37 +62,43 @@ namespace prog
     {
         int v = (r + g + b) / 3;
         r = v, g = v, b = v;
-        //r=r*0.299083;
-        //g=g*0.586611;
-        //b=b*0.114076;
+        // r=r*0.299083;
+        // g=g*0.586611;
+        // b=b*0.114076;
     }
 
-        Color& Color::operator=(const Color& c) {
+    Color &Color::operator=(const Color &c)
+    {
         r = c.red();
         g = c.green();
         b = c.blue();
         return *this;
     }
 
-    bool Color::operator==(const Color &c) const {
+    bool Color::operator==(const Color &c) const
+    {
 
-        if(r == c.r and g == c.g and b == c.b)
+        if (r == c.r && g == c.g && b == c.b)
         {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
-    bool Color::operator!=(const Color &c) const {
+    bool Color::operator!=(const Color &c) const
+    {
 
-        if(r == c.r and g == c.g and b == c.b)
+        if (r == c.r && g == c.g && b == c.b)
         {
             return false;
-        } else {
+        }
+        else
+        {
             return true;
         }
     }
-
 
 }

@@ -1,5 +1,6 @@
 #include "Image.hpp"
 #include <cstddef>
+using namespace std;
 
 namespace prog
 {
@@ -72,16 +73,85 @@ namespace prog
     }
   }
 
-  void Image::replace(const Color& a, const Color& b) {
-      for(int i = 0; i < width_; i++)
-        {
-            for(int j = 0; j < height_; j++)
-            {
-                if (pixels[i][j] == a)
-                    pixels[i][j] = b;
-            }
-        }
+  void Image::replace(const Color &a, const Color &b)
+  {
+    for (int i = 0; i < width_; i++)
+    {
+      for (int j = 0; j < height_; j++)
+      {
+        if (pixels[i][j] == a)
+          pixels[i][j] = b;
+      }
+    }
   }
+
+  void Image::fill(int x_, int y_, int w, int h, const Color &c)
+  {
+    for (int x = 0; x < width_; x++)
+    {
+      for (int y = 0; y < height_; y++)
+      {
+        if (x >= x_ && x < x_ + w && y >= y_ && y < y_ + h)
+        {
+          pixels[x][y] = c;
+        }
+      }
+    }
+  }
+
+  void Image::h_mirror()
+  {
+    int halfWidth = width_ / 2;
+    int height = height_;
+
+    for (int x = 0; x < halfWidth; x++)
+    {
+      for (int y = 0; y < height; y++)
+      {
+        int mirroredX = width_ - 1 - x;
+
+        // Store the pixel at (x, y) in a temporary variable
+        Color temp = pixels[x][y];
+
+        // Copy the pixel from the mirrored position to (x, y)
+        pixels[x][y] = pixels[mirroredX][y];
+
+        // Copy the pixel from the temporary variable to the mirrored position
+        pixels[mirroredX][y] = temp;
+      }
+    }
+  }
+
+  void Image::v_mirror()
+{
+    int width = width_;
+    int halfHeight = height_ / 2;
+    
+    for (int x = 0; x < width; x++)
+    {
+        for (int y = 0; y < halfHeight; y++)
+        {
+            int mirroredY = height_ - 1 - y;
+            
+            // Store the pixel at (x, y) in a temporary variable
+            Color temp = pixels[x][y];
+            
+            // Copy the pixel from the mirrored position to (x, y)
+            pixels[x][y] = pixels[x][mirroredY];
+            
+            // Copy the pixel from the temporary variable to the mirrored position
+            pixels[x][mirroredY] = temp;
+        }
+    }
+}
+
+void Image::add(const Image& img, const Color& neutral, int x, int y)
+    {
+        if(pixels[x][y] != neutral)
+        {
+            pixels[x][y] = img.pixels[x][y];
+        }
+    }
 
 
 }

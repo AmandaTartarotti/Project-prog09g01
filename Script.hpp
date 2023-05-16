@@ -19,6 +19,7 @@ namespace prog
     Image *image;
     // Input stream for reading script commands.
     std::ifstream input;
+    std::string root_path;
 
   private:
     // Private functions
@@ -29,6 +30,10 @@ namespace prog
     void invert();
     void to_gray_scale();
     void replace();
+    void fill();
+    void h_mirror();
+    void v_mirror();
+    void add();
   };
 }
 #endif
