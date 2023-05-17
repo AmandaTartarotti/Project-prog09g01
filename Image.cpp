@@ -1,5 +1,9 @@
 #include "Image.hpp"
+#include "XPM2.hpp"
 #include <cstddef>
+#include <sstream>
+#include <algorithm>
+#include <fstream>
 using namespace std;
 
 namespace prog
@@ -247,6 +251,54 @@ void Image::rotate_right(){
 
   // Assign the rotated pixels to the image
   pixels = rotatedPixels;
+}
+
+void Image::median_filter(int ws){
+  // Calculate the offset for the window
+  int offset = ws / 2;
+
+  // Create a temporary image to store the filtered result
+  Image filteredImage(width_, height_);
+
+  // Apply the median filter to each pixel
+  for (int y = 0; y < height_; y++){
+    for (int x = 0; x < width_; x++){
+      std::vector<Color> windowColors;
+
+      // Collect the colors within the window
+      for (int j = -offset; j <= offset; j++){
+        for (int i = -offset; i <= offset; i++){
+          int neighborX = x + i;
+          int neighborY = y + j;
+
+          // Check if the neighbor pixel is within bounds
+          if (neighborX >= 0 && neighborX < width_ && neighborY >= 0 && neighborY < height_){
+            windowColors.push_back(pixels[neighborX][neighborY]);
+          }
+        }
+      }
+
+      // Sort the colors within the window
+      std::sort(windowColors.begin(), windowColors.end());
+
+      // Get the median color
+      Color medianColor = windowColors[windowColors.size() / 2];
+
+      // Assign the median color to the corresponding pixel in the filtered image
+      filteredImage.pixels[x][y] = medianColor;
+    }
+  }
+
+  // Copy the filtered image back to the original image
+  *this = filteredImage;
+}
+
+void Image::xpm2_open(const std::string& filename) {
+    
+}
+
+void Image::xpm2_save(const std::string& filename) {
+    
 }
 
 }
