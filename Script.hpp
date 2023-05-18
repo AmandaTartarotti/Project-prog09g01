@@ -9,21 +9,37 @@ namespace prog
 {
   class Script
   {
-  public: 
+  public:
     Script(const std::string &filename);
     ~Script();
     void run();
+
   private:
     // Current image.
     Image *image;
     // Input stream for reading script commands.
     std::ifstream input;
+    std::string root_path;
+
   private:
     // Private functions
     void clear_image_if_any();
     void open();
     void blank();
     void save();
+    void invert();
+    void to_gray_scale();
+    void replace();
+    void fill();
+    void h_mirror();
+    void v_mirror();
+    void add();
+    void crop();
+    void rotate_left();
+    void rotate_right();
+    void median_filter();
+    void xpm2_open();
+    void xpm2_save();
   };
 }
 #endif
