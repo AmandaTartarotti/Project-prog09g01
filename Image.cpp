@@ -39,6 +39,7 @@ namespace prog // Define um namespace chamado "prog"
     }
 
     delete[] pixels; // delete sub array
+
     pixels = NULL; // Define o ponteiro como NULL para evitar referências inválidas
   }
 
@@ -71,6 +72,7 @@ namespace prog // Define um namespace chamado "prog"
 
     return pixels[x][y]; // Retorna a referência constante à cor na posição (x, y) do array de pixels
   }
+
 
   void Image::invert()
   {
