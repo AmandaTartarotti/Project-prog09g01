@@ -1,59 +1,78 @@
-#include "Image.hpp"
-#include "XPM2.hpp"
-#include <cstddef>
-#include <sstream>
-#include <algorithm>
-#include <fstream>
-using namespace std;
+#include "Image.hpp" // Inclui o arquivo de cabeçalho "Image.hpp"
+#include "XPM2.hpp" // Inclui o arquivo de cabeçalho "XPM2.hpp"
+#include <cstddef> // Inclui a biblioteca <cstddef> para usar o tipo std::size_t
+#include <sstream> // Inclui a biblioteca <sstream> para usar fluxos de string
+#include <algorithm> // Inclui a biblioteca <algorithm> para usar funções de algoritmo
+#include <fstream> // Inclui a biblioteca <fstream> para operações de arquivo
+#include <stdexcept> // Inclui a biblioteca <stdexcept>
 
-namespace prog
+using namespace std; // Usa o namespace std
+
+namespace prog // Define um namespace chamado "prog"
 {
+  // Create image with width w, height h, and all pixels set to color fill.
   Image::Image(int w, int h, const Color &fill)
   {
-    width_ = w, height_ = h;
+    width_ = w, height_ = h; // Define width_ como w e height_ como h
 
-    pixels = new Color *[width_];
-    for (int i = 0; i < width_; i++)
+    pixels = new Color *[width_]; // Aloca memória para o array de ponteiros de cores com tamanho width_
+    for (int i = 0; i < width_; i++) // Loop para cada ponteiro no array de ponteiros
     {
-      pixels[i] = new Color[height_];
+      pixels[i] = new Color[height_]; // Aloca memória para o array de cores com tamanho height_
     }
 
-    for (int i = 0; i < width_; i++)
+    for (int i = 0; i < width_; i++) // Loop para cada coluna
     {
-      for (int j = 0; j < height_; j++)
+      for (int j = 0; j < height_; j++) // Loop para cada linha
       {
-        pixels[i][j] = fill;
+        pixels[i][j] = fill; // Atribui a cor de preenchimento à posição (i, j) do array de pixels
       }
     }
   }
+
+  // Implementação do destrutor ~Image()
   Image::~Image()
   {
-    for (int i = 0; i < width_; i++)
+    for (int i = 0; i < width_; i++) // Loop para cada ponteiro no array de ponteiros
     {
       delete[] pixels[i]; // delete stored pointer
     }
 
     delete[] pixels; // delete sub array
-    pixels = NULL;
+
+    pixels = NULL; // Define o ponteiro como NULL para evitar referências inválidas
   }
+
+  //Get image width
   int Image::width() const
   {
-    return width_;
+    return width_; // Retorna o valor de width_
   }
+
+  //Get image height
   int Image::height() const
   {
-    return height_;
+    return height_; // Retorna o valor de height_
   }
 
+  //Get mutable reference to the value of pixel (x, y), where 0 <= x < width() and 0 <= y < height()
   Color &Image::at(int x, int y)
   {
-    return pixels[x][y];
+    if ((x >= 0 && x < width_) && ( y >= 0 && y < height_)) { // Confere se 0 <= x < width() and 0 <= y < height()
+      return pixels[x][y]; // Retorna a referência à cor na posição (x, y) do array de pixels
+    }
+    else { //Se as condições não forem satisfeitas
+      throw std::out_of_range("Invalid pixel coordinates"); // lança uma exceção informando que as coordenadas são inválidas.
+    }
   }
 
+  //Get read-only reference to the value of pixel (x, y).
   const Color &Image::at(int x, int y) const
   {
-    return pixels[x][y];
+
+    return pixels[x][y]; // Retorna a referência constante à cor na posição (x, y) do array de pixels
   }
+
 
   void Image::invert()
   {
@@ -200,7 +219,7 @@ void Image::rotate_left(){
   for (int i = 0; i < width_; i++)
   {
     for (int j = 0; j < height_; j++){
-      rotatedPixels[height_ - 1 - j][i] = pixels[i][j];
+      rotatedPixels[j][width_ - i - 1] = pixels[i][j];
     }
   }
 
@@ -233,7 +252,7 @@ void Image::rotate_right(){
   for (int i = 0; i < width_; i++)
   {
     for (int j = 0; j < height_; j++){
-      rotatedPixels[j][width_ - 1 - i] = pixels[i][j];
+      rotatedPixels[height_ - j - 1][i] = pixels[i][j];
     }
   }
 
@@ -254,13 +273,14 @@ void Image::rotate_right(){
 }
 
 void Image::median_filter(int ws){
+
   // Calculate the offset for the window
   int offset = ws / 2;
 
   // Create a temporary image to store the filtered result
   Image filteredImage(width_, height_);
 
-  // Apply the median filter to each pixel
+   // Apply the median filter to each pixel
   for (int y = 0; y < height_; y++){
     for (int x = 0; x < width_; x++){
       std::vector<Color> windowColors;
@@ -293,12 +313,32 @@ void Image::median_filter(int ws){
   *this = filteredImage;
 }
 
-void Image::xpm2_open(const std::string& filename) {
+void Image::xpm2_open(const std::string& filename){
+    // Load the image from the XPM2 file
+    Image* newImage = loadFromXPM2(filename);
+
+    // Check if loading was successful
+    if (newImage != nullptr)
+    {
+        // Delete the current image data
+        for (int i = 0; i < width_; i++)
+        {
+            delete[] pixels[i];
+        }
+        delete[] pixels;
+
+        // Assign the new image to the current object
+        width_ = newImage->width();
+        height_ = newImage->height();
+        pixels = newImage->pixels;
+    }
     
+    // Deallocate the temporary image object
+    delete newImage;
 }
 
-void Image::xpm2_save(const std::string& filename) {
-    
+void Image::xpm2_save(const std::string& filename){
+
 }
 
 }

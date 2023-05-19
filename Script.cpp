@@ -109,18 +109,19 @@ namespace prog
             }
             else if (command == "median_filter")
             {
-                median_filter();
-                continue;
+                 median_filter();
+                 continue;
             }
+
             else if (command == "xpm2_open")
             {
-                xpm2_open();
-                continue;
+                 xpm2_open();
+                 continue;
             }
-            else if (command == "xpm2_save")
-            {
-                xpm2_save();
-                continue;
+
+            else if (command == "xpm2_save"){
+                 xpm2_save();
+                 continue;
             }
         }
     }
@@ -189,13 +190,37 @@ namespace prog
 
     void Script::add()
     {
-        std::string filename;
+        string filename;
         int r, g, b, x, y;
-        Image img2 = *loadFromPNG(root_path + "/" + filename);
         input >> filename >> r >> g >> b >> x >> y;
-        Color neutral;
-        neutral.red() = r, neutral.green() = g, neutral.blue() = b;
-        image->add(img2, neutral, x, y);
+
+        // Load the image from the PNG file
+        Image *newImage = loadFromPNG(filename);
+
+        // Get the dimensions of the new image
+        int newWidth = newImage->width();
+        int newHeight = newImage->height();
+
+        // Copy pixels from the new image to the current image
+        for (int i = 0; i < newHeight; i++)
+        {
+            for (int j = 0; j < newWidth; j++)
+            {
+                // Check if the pixel in the new image is not the "neutral" color
+                if (newImage->at(j, i) != Color(r, g, b))
+                {
+                    // Calculate the corresponding position in the current image
+                    int currentX = x + j;
+                    int currentY = y + i;
+
+                    // Set the pixel in the current image to the corresponding pixel in the new image
+                    image->at(currentX, currentY) = newImage->at(j, i);
+                }
+            }
+        }
+
+        // Free the memory allocated
+        delete newImage;
     }
 
     void Script::crop()
@@ -227,7 +252,7 @@ namespace prog
         std::string filename;
         image->xpm2_open(filename);
     }
-
+    
     void Script::xpm2_save()
     {
         std::string filename;

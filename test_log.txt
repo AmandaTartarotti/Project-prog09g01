@@ -1,102 +1,26 @@
->>>> [1] basic_blank1 <<<<
-Executing command 'blank' ...
-Executing command 'save' ...
-=================================================================
-==86==ERROR: AddressSanitizer: requested allocation size 0xfffffffffffffffd (0x800 after adjustments for alignment, red zones etc.) exceeds maximum supported size of 0x10000000000 (thread T0)
-    #0 0x7f1d5a944867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x7f1d5b389f8e in stbi_write_png_to_mem stb/stb_image_write.h:1145
-    #2 0x7f1d5b38c1c3 in stbi_write_png stb/stb_image_write.h:1219
-    #3 0x7f1d5b395cdf in prog::saveToPNG(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, prog::Image const*) /mnt/d/UPorto/Programação/project/PNG.cpp:44
-    #4 0x7f1d5b3526be in prog::Script::save() /mnt/d/UPorto/Programação/project/Script.cpp:74
-    #5 0x7f1d5b35150c in prog::Script::run() /mnt/d/UPorto/Programação/project/Script.cpp:48
-    #6 0x7f1d5b34327b in prog::TestDriver::test_script(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /mnt/d/UPorto/Programação/project/test.cpp:43
-    #7 0x7f1d5b34407d in prog::TestDriver::run_test(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /mnt/d/UPorto/Programação/project/test.cpp:79
-    #8 0x7f1d5b345ef3 in prog::TestDriver::test_scripts(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /mnt/d/UPorto/Programação/project/test.cpp:165
-    #9 0x7f1d5b342340 in main /mnt/d/UPorto/Programação/project/test.cpp:186
-    #10 0x7f1d59d09d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-
-==86==HINT: if you don't care about these errors you may set allocator_may_return_null=1
-SUMMARY: AddressSanitizer: allocation-size-too-big ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145 in __interceptor_malloc
-==86==ABORTING
->>>> [2] basic_blank2 <<<<
-Executing command 'blank' ...
-Executing command 'save' ...
-=================================================================
-==87==ERROR: AddressSanitizer: requested allocation size 0xfffffffffffffffd (0x800 after adjustments for alignment, red zones etc.) exceeds maximum supported size of 0x10000000000 (thread T0)
-    #0 0x7f1d5a944867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x7f1d5b389f8e in stbi_write_png_to_mem stb/stb_image_write.h:1145
-    #2 0x7f1d5b38c1c3 in stbi_write_png stb/stb_image_write.h:1219
-    #3 0x7f1d5b395cdf in prog::saveToPNG(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, prog::Image const*) /mnt/d/UPorto/Programação/project/PNG.cpp:44
-    #4 0x7f1d5b3526be in prog::Script::save() /mnt/d/UPorto/Programação/project/Script.cpp:74
-    #5 0x7f1d5b35150c in prog::Script::run() /mnt/d/UPorto/Programação/project/Script.cpp:48
-    #6 0x7f1d5b34327b in prog::TestDriver::test_script(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /mnt/d/UPorto/Programação/project/test.cpp:43
-    #7 0x7f1d5b34407d in prog::TestDriver::run_test(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /mnt/d/UPorto/Programação/project/test.cpp:79
-    #8 0x7f1d5b345ef3 in prog::TestDriver::test_scripts(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /mnt/d/UPorto/Programação/project/test.cpp:165
-    #9 0x7f1d5b342340 in main /mnt/d/UPorto/Programação/project/test.cpp:186
-    #10 0x7f1d59d09d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-
-==87==HINT: if you don't care about these errors you may set allocator_may_return_null=1
-SUMMARY: AddressSanitizer: allocation-size-too-big ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145 in __interceptor_malloc
-==87==ABORTING
->>>> [3] basic_blank3 <<<<
-Executing command 'blank' ...
-Executing command 'blank' ...
-Executing command 'save' ...
-=================================================================
-==88==ERROR: AddressSanitizer: requested allocation size 0xfffffffffffffffd (0x800 after adjustments for alignment, red zones etc.) exceeds maximum supported size of 0x10000000000 (thread T0)
-    #0 0x7f1d5a944867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x7f1d5b389f8e in stbi_write_png_to_mem stb/stb_image_write.h:1145
-    #2 0x7f1d5b38c1c3 in stbi_write_png stb/stb_image_write.h:1219
-    #3 0x7f1d5b395cdf in prog::saveToPNG(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, prog::Image const*) /mnt/d/UPorto/Programação/project/PNG.cpp:44
-    #4 0x7f1d5b3526be in prog::Script::save() /mnt/d/UPorto/Programação/project/Script.cpp:74
-    #5 0x7f1d5b35150c in prog::Script::run() /mnt/d/UPorto/Programação/project/Script.cpp:48
-    #6 0x7f1d5b34327b in prog::TestDriver::test_script(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /mnt/d/UPorto/Programação/project/test.cpp:43
-    #7 0x7f1d5b34407d in prog::TestDriver::run_test(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /mnt/d/UPorto/Programação/project/test.cpp:79
-    #8 0x7f1d5b345ef3 in prog::TestDriver::test_scripts(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /mnt/d/UPorto/Programação/project/test.cpp:165
-    #9 0x7f1d5b342340 in main /mnt/d/UPorto/Programação/project/test.cpp:186
-    #10 0x7f1d59d09d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-
-==88==HINT: if you don't care about these errors you may set allocator_may_return_null=1
-SUMMARY: AddressSanitizer: allocation-size-too-big ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145 in __interceptor_malloc
-==88==ABORTING
->>>> [4] basic_open1 <<<<
+>>>> [1] rotate_left1 <<<<
 Executing command 'open' ...
+Executing command 'rotate_left' ...
 Executing command 'save' ...
-=================================================================
-==89==ERROR: AddressSanitizer: requested allocation size 0xfffffffffffffffd (0x800 after adjustments for alignment, red zones etc.) exceeds maximum supported size of 0x10000000000 (thread T0)
-    #0 0x7f1d5a944867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x7f1d5b389f8e in stbi_write_png_to_mem stb/stb_image_write.h:1145
-    #2 0x7f1d5b38c1c3 in stbi_write_png stb/stb_image_write.h:1219
-    #3 0x7f1d5b395cdf in prog::saveToPNG(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, prog::Image const*) /mnt/d/UPorto/Programação/project/PNG.cpp:44
-    #4 0x7f1d5b3526be in prog::Script::save() /mnt/d/UPorto/Programação/project/Script.cpp:74
-    #5 0x7f1d5b35150c in prog::Script::run() /mnt/d/UPorto/Programação/project/Script.cpp:48
-    #6 0x7f1d5b34327b in prog::TestDriver::test_script(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /mnt/d/UPorto/Programação/project/test.cpp:43
-    #7 0x7f1d5b34407d in prog::TestDriver::run_test(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /mnt/d/UPorto/Programação/project/test.cpp:79
-    #8 0x7f1d5b345ef3 in prog::TestDriver::test_scripts(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /mnt/d/UPorto/Programação/project/test.cpp:165
-    #9 0x7f1d5b342340 in main /mnt/d/UPorto/Programação/project/test.cpp:186
-    #10 0x7f1d59d09d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-
-==89==HINT: if you don't care about these errors you may set allocator_may_return_null=1
-SUMMARY: AddressSanitizer: allocation-size-too-big ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145 in __interceptor_malloc
-==89==ABORTING
->>>> [5] basic_open2 <<<<
+>>>> [2] rotate_left2 <<<<
 Executing command 'open' ...
-Executing command 'open' ...
+Executing command 'rotate_left' ...
+Executing command 'rotate_left' ...
 Executing command 'save' ...
-=================================================================
-==90==ERROR: AddressSanitizer: requested allocation size 0xfffffffffffffffd (0x800 after adjustments for alignment, red zones etc.) exceeds maximum supported size of 0x10000000000 (thread T0)
-    #0 0x7f1d5a944867 in __interceptor_malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145
-    #1 0x7f1d5b389f8e in stbi_write_png_to_mem stb/stb_image_write.h:1145
-    #2 0x7f1d5b38c1c3 in stbi_write_png stb/stb_image_write.h:1219
-    #3 0x7f1d5b395cdf in prog::saveToPNG(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, prog::Image const*) /mnt/d/UPorto/Programação/project/PNG.cpp:44
-    #4 0x7f1d5b3526be in prog::Script::save() /mnt/d/UPorto/Programação/project/Script.cpp:74
-    #5 0x7f1d5b35150c in prog::Script::run() /mnt/d/UPorto/Programação/project/Script.cpp:48
-    #6 0x7f1d5b34327b in prog::TestDriver::test_script(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /mnt/d/UPorto/Programação/project/test.cpp:43
-    #7 0x7f1d5b34407d in prog::TestDriver::run_test(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /mnt/d/UPorto/Programação/project/test.cpp:79
-    #8 0x7f1d5b345ef3 in prog::TestDriver::test_scripts(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) /mnt/d/UPorto/Programação/project/test.cpp:165
-    #9 0x7f1d5b342340 in main /mnt/d/UPorto/Programação/project/test.cpp:186
-    #10 0x7f1d59d09d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-
-==90==HINT: if you don't care about these errors you may set allocator_may_return_null=1
-SUMMARY: AddressSanitizer: allocation-size-too-big ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:145 in __interceptor_malloc
-==90==ABORTING
+>>>> [3] rotate_left3 <<<<
+Executing command 'open' ...
+Executing command 'rotate_left' ...
+Executing command 'rotate_left' ...
+Executing command 'rotate_left' ...
+Executing command 'save' ...
+>>>> [4] rotate_left_rotate_right1 <<<<
+Executing command 'open' ...
+Executing command 'rotate_left' ...
+Executing command 'rotate_right' ...
+Executing command 'save' ...
+>>>> [5] rotate_left_rotate_right2 <<<<
+Executing command 'open' ...
+Executing command 'rotate_left' ...
+Executing command 'rotate_right' ...
+Executing command 'rotate_right' ...
+Executing command 'save' ...
