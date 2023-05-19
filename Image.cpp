@@ -73,7 +73,7 @@ namespace prog // Define um namespace chamado "prog"
     return pixels[x][y]; // Retorna a referência constante à cor na posição (x, y) do array de pixels
   }
 
-
+  // Transforms each individual pixel (r, g, b) to (255-r,255-g,255-b)
   void Image::invert()
   {
     for (int i = 0; i < width_; i++)
@@ -168,11 +168,11 @@ namespace prog // Define um namespace chamado "prog"
     }
 }
 
-void Image::add(const Image& img, const Color& neutral, int x, int y)
+void Image::add(const Image& img2, const Color& neutral, int x, int y)
     {
         if(pixels[x][y] != neutral)
         {
-            pixels[x][y] = img.pixels[x][y];
+            pixels[x][y] = img2.pixels[x][y];
         }
     }
 
@@ -273,6 +273,58 @@ void Image::rotate_right(){
 }
 
 // void Image::median_filter(int ws){
+// // void medianFilter(Image& image, int ws) {
+//   int width = image->width();
+//   int height = image->height();
+//   int halfSize = ws / 2;
+
+//   Image aux = new* Image(image->width(), image->height()); // Cria uma imagem temporária para armazenar os valores filtrados
+
+//   for (int x = 0; x < width; x++) {
+
+//     for (int y = 0; y < height; y++) {
+      
+//       int minX = std::max(0, x - halfSize);
+//       int maxX = std::min(width - 1, x + halfSize);
+//       int minY = std::max(0, y - halfSize);
+//       int maxY = std::min(height - 1, y + halfSize);
+
+//       std::vector<int> redValues;
+//       std::vector<int> greenValues;
+//       std::vector<int> blueValues;
+
+//       // Coleta os valores dos canais R, G e B dos pixels na vizinhança
+//       for (int nx = minX; nx <= maxX; nx++) {
+//         for (int ny = minY; ny <= maxY; ny++) {
+//           Color pixel = image.getPixel(nx, ny);
+//           redValues.push_back(pixel.getRed());
+//           greenValues.push_back(pixel.getGreen());
+//           blueValues.push_back(pixel.getBlue());
+//         }
+//       }
+
+//       // Ordena os valores dos canais R, G e B
+//       std::sort(redValues.begin(), redValues.end());
+//       std::sort(greenValues.begin(), greenValues.end());
+//       std::sort(blueValues.begin(), blueValues.end());
+
+//       // Obtém o valor mediano para cada canal
+//       int medianRed = redValues[redValues.size() / 2];
+//       int medianGreen = greenValues[greenValues.size() / 2];
+//       int medianBlue = blueValues[blueValues.size() / 2];
+
+//       // Atribui o valor mediano para o pixel na imagem temporária
+//       Color medianColor(medianRed, medianGreen, medianBlue);
+//       tempImage.setPixel(x, y, medianColor);
+//     }
+//   }
+
+//   // Copia os valores filtrados de volta para a imagem original
+//   image = tempImage;
+// }
+
+// AQUIIII
+
 //   // Calculate the offset for the window
 //   int offset = ws / 2;
 
@@ -312,8 +364,28 @@ void Image::rotate_right(){
 //   *this = filteredImage;
 // }
 
-// void Image::xpm2_open(const std::string& filename) {
+// void Image::xpm2_open(const std::string& filename){
+//     // Load the image from the XPM2 file
+//     Image* newImage = loadFromXPM2(filename);
+
+//     // Check if loading was successful
+//     if (newImage != nullptr)
+//     {
+//         // Delete the current image data
+//         for (int i = 0; i < width_; i++)
+//         {
+//             delete[] pixels[i];
+//         }
+//         delete[] pixels;
+
+//         // Assign the new image to the current object
+//         width_ = newImage->width();
+//         height_ = newImage->height();
+//         pixels = newImage->pixels;
+//     }
     
+//     // Deallocate the temporary image object
+//     delete newImage;
 // }
 
 // void Image::xpm2_save(const std::string& filename) {

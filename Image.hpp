@@ -26,7 +26,7 @@ namespace prog
     void fill(int x, int y, int w, int h, const Color &c);
     void h_mirror();
     void v_mirror();
-    void add(const Image &img, const Color &neutral, int x, int y);
+    void add(const Image &img2, const Color &neutral, int x, int y);
     void crop(int x, int y, int w, int h);
     void rotate_left();
     void rotate_right();
