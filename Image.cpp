@@ -219,7 +219,7 @@ void Image::rotate_left(){
   for (int i = 0; i < width_; i++)
   {
     for (int j = 0; j < height_; j++){
-      rotatedPixels[height_ - 1 - j][i] = pixels[i][j];
+      rotatedPixels[j][width_ - i - 1] = pixels[i][j];
     }
   }
 
@@ -252,7 +252,7 @@ void Image::rotate_right(){
   for (int i = 0; i < width_; i++)
   {
     for (int j = 0; j < height_; j++){
-      rotatedPixels[j][width_ - 1 - i] = pixels[i][j];
+      rotatedPixels[height_ - j - 1][i] = pixels[i][j];
     }
   }
 
