@@ -107,21 +107,21 @@ namespace prog
                 rotate_right();
                 continue;
             }
-            else if (command == "median_filter")
-            {
-                median_filter();
-                continue;
-            }
-            else if (command == "xpm2_open")
-            {
-                xpm2_open();
-                continue;
-            }
-            else if (command == "xpm2_save")
-            {
-                xpm2_save();
-                continue;
-            }
+            // else if (command == "median_filter")
+            // {
+            //     median_filter();
+            //     continue;
+            // }
+            // else if (command == "xpm2_open")
+            // {
+            //     xpm2_open();
+            //     continue;
+            // }
+            // else if (command == "xpm2_save")
+            // {
+            //     xpm2_save();
+            //     continue;
+            // }
         }
     }
     void Script::open()
@@ -215,23 +215,23 @@ namespace prog
         image->rotate_right();
     }
 
-    void Script::median_filter()
-    {
-        int ws;
-        input >> ws;
-        image->median_filter(ws);
-    }
+    // void Script::median_filter()
+    // {
+    //     int ws;
+    //     input >> ws;
+    //     image->median_filter(ws);
+    // }
 
-    void Script::xpm2_open()
-    {
-        std::string filename;
-        image->xpm2_open(filename);
-    }
+    // void Script::xpm2_open()
+    // {
+    //     std::string filename;
+    //     image->xpm2_open(filename);
+    // }
 
-    void Script::xpm2_save()
-    {
-        std::string filename;
-        image->xpm2_save(filename);
-    }
+    // void Script::xpm2_save()
+    // {
+    //     std::string filename;
+    //     image->xpm2_save(filename);
+    // }
 
 }
