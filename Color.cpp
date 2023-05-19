@@ -38,10 +38,12 @@ namespace prog // Define um namespace chamado "prog"
     {
         return r; // Retorna o valor de r
     }
+
     rgb_value Color::green() const // Implementação do getter green()
     {
         return g; // Retorna o valor de g
     }
+
     rgb_value Color::blue() const // Implementação do getter blue()
     {
         return b; // Retorna o valor de b
@@ -52,10 +54,12 @@ namespace prog // Define um namespace chamado "prog"
     {
         return r; // Retorna a referência de r
     }
+
     rgb_value &Color::green() // Implementação do setter green()
     {
         return g; // Retorna a referência de g
     }
+
     rgb_value &Color::blue() // Implementação do setter blue()
     {
         return b; // Retorna a referência de b
@@ -117,5 +121,4 @@ namespace prog // Define um namespace chamado "prog"
 
         }
     }
-
 }

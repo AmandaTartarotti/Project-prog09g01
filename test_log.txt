@@ -1,26 +1,135 @@
->>>> [1] rotate_left1 <<<<
-Executing command 'open' ...
-Executing command 'rotate_left' ...
+>>>> [1] xpm2_open1 <<<<
+Executing command 'xpm2_open' ...
+Script.cpp:252:25: runtime error: member call on null pointer of type 'struct Image'
+Executing command 'input/blarg.xpm' ...
 Executing command 'save' ...
->>>> [2] rotate_left2 <<<<
-Executing command 'open' ...
-Executing command 'rotate_left' ...
-Executing command 'rotate_left' ...
+PNG.cpp:31:30: runtime error: member call on null pointer of type 'const struct Image'
+Image.cpp:55:12: runtime error: member access within null pointer of type 'const struct Image'
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==381==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000004 (pc 0x7f0ce566b90d bp 0x7ffff0e05e20 sp 0x7ffff0e05e10 T0)
+==381==The signal is caused by a READ memory access.
+==381==Hint: address points to the zero page.
+    #0 0x7f0ce566b90d in prog::Image::height() const /mnt/d/UPorto/Programação/project/Project-prog09g01/Image.cpp:55
+    #1 0x7f0ce56b904f in prog::saveToPNG(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, prog::Image const*) /mnt/d/UPorto/Programação/project/Project-prog09g01/PNG.cpp:31
+    #2 0x7f0ce56732fa in prog::Script::save() /mnt/d/UPorto/Programação/project/Project-prog09g01/Script.cpp:149
+    #3 0x7f0ce5671d3f in prog::Script::run() /mnt/d/UPorto/Programação/project/Project-prog09g01/Script.cpp:57
+    #4 0x7f0ce565c3bb in prog::TestDriver::test_script(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8c3bb)
+    #5 0x7f0ce565d1bd in prog::TestDriver::run_test(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8d1bd)
+    #6 0x7f0ce565f033 in prog::TestDriver::test_scripts(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8f033)
+    #7 0x7f0ce565b480 in main /mnt/d/UPorto/Programação/project/Project-prog09g01/test.cpp:186
+    #8 0x7f0ce4009d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7f0ce4009e3f in __libc_start_main_impl ../csu/libc-start.c:392
+    #10 0x7f0ce565b014 in _start (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8b014)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /mnt/d/UPorto/Programação/project/Project-prog09g01/Image.cpp:55 in prog::Image::height() const
+==381==ABORTING
+>>>> [2] xpm2_open2 <<<<
+Executing command 'xpm2_open' ...
+Script.cpp:252:25: runtime error: member call on null pointer of type 'struct Image'
+Executing command 'input/squares.xpm' ...
 Executing command 'save' ...
->>>> [3] rotate_left3 <<<<
-Executing command 'open' ...
-Executing command 'rotate_left' ...
-Executing command 'rotate_left' ...
-Executing command 'rotate_left' ...
+PNG.cpp:31:30: runtime error: member call on null pointer of type 'const struct Image'
+Image.cpp:55:12: runtime error: member access within null pointer of type 'const struct Image'
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==382==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000004 (pc 0x7f0ce566b90d bp 0x7ffff0e05e20 sp 0x7ffff0e05e10 T0)
+==382==The signal is caused by a READ memory access.
+==382==Hint: address points to the zero page.
+    #0 0x7f0ce566b90d in prog::Image::height() const /mnt/d/UPorto/Programação/project/Project-prog09g01/Image.cpp:55
+    #1 0x7f0ce56b904f in prog::saveToPNG(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, prog::Image const*) /mnt/d/UPorto/Programação/project/Project-prog09g01/PNG.cpp:31
+    #2 0x7f0ce56732fa in prog::Script::save() /mnt/d/UPorto/Programação/project/Project-prog09g01/Script.cpp:149
+    #3 0x7f0ce5671d3f in prog::Script::run() /mnt/d/UPorto/Programação/project/Project-prog09g01/Script.cpp:57
+    #4 0x7f0ce565c3bb in prog::TestDriver::test_script(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8c3bb)
+    #5 0x7f0ce565d1bd in prog::TestDriver::run_test(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8d1bd)
+    #6 0x7f0ce565f033 in prog::TestDriver::test_scripts(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8f033)
+    #7 0x7f0ce565b480 in main /mnt/d/UPorto/Programação/project/Project-prog09g01/test.cpp:186
+    #8 0x7f0ce4009d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7f0ce4009e3f in __libc_start_main_impl ../csu/libc-start.c:392
+    #10 0x7f0ce565b014 in _start (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8b014)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /mnt/d/UPorto/Programação/project/Project-prog09g01/Image.cpp:55 in prog::Image::height() const
+==382==ABORTING
+>>>> [3] xpm2_open3 <<<<
+Executing command 'xpm2_open' ...
+Script.cpp:252:25: runtime error: member call on null pointer of type 'struct Image'
+Executing command 'input/tetris.xpm' ...
 Executing command 'save' ...
->>>> [4] rotate_left_rotate_right1 <<<<
-Executing command 'open' ...
-Executing command 'rotate_left' ...
-Executing command 'rotate_right' ...
+PNG.cpp:31:30: runtime error: member call on null pointer of type 'const struct Image'
+Image.cpp:55:12: runtime error: member access within null pointer of type 'const struct Image'
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==383==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000004 (pc 0x7f0ce566b90d bp 0x7ffff0e05e20 sp 0x7ffff0e05e10 T0)
+==383==The signal is caused by a READ memory access.
+==383==Hint: address points to the zero page.
+    #0 0x7f0ce566b90d in prog::Image::height() const /mnt/d/UPorto/Programação/project/Project-prog09g01/Image.cpp:55
+    #1 0x7f0ce56b904f in prog::saveToPNG(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, prog::Image const*) /mnt/d/UPorto/Programação/project/Project-prog09g01/PNG.cpp:31
+    #2 0x7f0ce56732fa in prog::Script::save() /mnt/d/UPorto/Programação/project/Project-prog09g01/Script.cpp:149
+    #3 0x7f0ce5671d3f in prog::Script::run() /mnt/d/UPorto/Programação/project/Project-prog09g01/Script.cpp:57
+    #4 0x7f0ce565c3bb in prog::TestDriver::test_script(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8c3bb)
+    #5 0x7f0ce565d1bd in prog::TestDriver::run_test(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8d1bd)
+    #6 0x7f0ce565f033 in prog::TestDriver::test_scripts(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8f033)
+    #7 0x7f0ce565b480 in main /mnt/d/UPorto/Programação/project/Project-prog09g01/test.cpp:186
+    #8 0x7f0ce4009d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7f0ce4009e3f in __libc_start_main_impl ../csu/libc-start.c:392
+    #10 0x7f0ce565b014 in _start (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8b014)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /mnt/d/UPorto/Programação/project/Project-prog09g01/Image.cpp:55 in prog::Image::height() const
+==383==ABORTING
+>>>> [4] xpm2_open4 <<<<
+Executing command 'xpm2_open' ...
+Script.cpp:252:25: runtime error: member call on null pointer of type 'struct Image'
+Executing command 'input/mondrian.xpm' ...
 Executing command 'save' ...
->>>> [5] rotate_left_rotate_right2 <<<<
-Executing command 'open' ...
-Executing command 'rotate_left' ...
-Executing command 'rotate_right' ...
-Executing command 'rotate_right' ...
+PNG.cpp:31:30: runtime error: member call on null pointer of type 'const struct Image'
+Image.cpp:55:12: runtime error: member access within null pointer of type 'const struct Image'
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==384==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000004 (pc 0x7f0ce566b90d bp 0x7ffff0e05e20 sp 0x7ffff0e05e10 T0)
+==384==The signal is caused by a READ memory access.
+==384==Hint: address points to the zero page.
+    #0 0x7f0ce566b90d in prog::Image::height() const /mnt/d/UPorto/Programação/project/Project-prog09g01/Image.cpp:55
+    #1 0x7f0ce56b904f in prog::saveToPNG(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, prog::Image const*) /mnt/d/UPorto/Programação/project/Project-prog09g01/PNG.cpp:31
+    #2 0x7f0ce56732fa in prog::Script::save() /mnt/d/UPorto/Programação/project/Project-prog09g01/Script.cpp:149
+    #3 0x7f0ce5671d3f in prog::Script::run() /mnt/d/UPorto/Programação/project/Project-prog09g01/Script.cpp:57
+    #4 0x7f0ce565c3bb in prog::TestDriver::test_script(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8c3bb)
+    #5 0x7f0ce565d1bd in prog::TestDriver::run_test(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8d1bd)
+    #6 0x7f0ce565f033 in prog::TestDriver::test_scripts(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8f033)
+    #7 0x7f0ce565b480 in main /mnt/d/UPorto/Programação/project/Project-prog09g01/test.cpp:186
+    #8 0x7f0ce4009d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7f0ce4009e3f in __libc_start_main_impl ../csu/libc-start.c:392
+    #10 0x7f0ce565b014 in _start (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8b014)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /mnt/d/UPorto/Programação/project/Project-prog09g01/Image.cpp:55 in prog::Image::height() const
+==384==ABORTING
+>>>> [5] xpm2_open5 <<<<
+Executing command 'xpm2_open' ...
+Script.cpp:252:25: runtime error: member call on null pointer of type 'struct Image'
+Executing command 'input/lion.xpm' ...
 Executing command 'save' ...
+PNG.cpp:31:30: runtime error: member call on null pointer of type 'const struct Image'
+Image.cpp:55:12: runtime error: member access within null pointer of type 'const struct Image'
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==385==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000004 (pc 0x7f0ce566b90d bp 0x7ffff0e05e20 sp 0x7ffff0e05e10 T0)
+==385==The signal is caused by a READ memory access.
+==385==Hint: address points to the zero page.
+    #0 0x7f0ce566b90d in prog::Image::height() const /mnt/d/UPorto/Programação/project/Project-prog09g01/Image.cpp:55
+    #1 0x7f0ce56b904f in prog::saveToPNG(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, prog::Image const*) /mnt/d/UPorto/Programação/project/Project-prog09g01/PNG.cpp:31
+    #2 0x7f0ce56732fa in prog::Script::save() /mnt/d/UPorto/Programação/project/Project-prog09g01/Script.cpp:149
+    #3 0x7f0ce5671d3f in prog::Script::run() /mnt/d/UPorto/Programação/project/Project-prog09g01/Script.cpp:57
+    #4 0x7f0ce565c3bb in prog::TestDriver::test_script(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8c3bb)
+    #5 0x7f0ce565d1bd in prog::TestDriver::run_test(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8d1bd)
+    #6 0x7f0ce565f033 in prog::TestDriver::test_scripts(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8f033)
+    #7 0x7f0ce565b480 in main /mnt/d/UPorto/Programação/project/Project-prog09g01/test.cpp:186
+    #8 0x7f0ce4009d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7f0ce4009e3f in __libc_start_main_impl ../csu/libc-start.c:392
+    #10 0x7f0ce565b014 in _start (/mnt/d/UPorto/Programação/project/Project-prog09g01/test+0x8b014)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /mnt/d/UPorto/Programação/project/Project-prog09g01/Image.cpp:55 in prog::Image::height() const
+==385==ABORTING

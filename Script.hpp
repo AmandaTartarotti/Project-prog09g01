@@ -10,19 +10,20 @@ namespace prog
   class Script
   {
   public:
+    // Funções públicas
     Script(const std::string &filename);
     ~Script();
     void run();
 
   private:
-    // Current image.
+    // Imagem atual
     Image *image;
-    // Input stream for reading script commands.
+    // Fluxo de entrada para leitura de comandos de script
     std::ifstream input;
     std::string root_path;
 
   private:
-    // Private functions
+    // Funções privadas
     void clear_image_if_any();
     void open();
     void blank();
