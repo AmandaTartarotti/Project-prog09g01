@@ -2,7 +2,7 @@
 #include <fstream>
 
 namespace prog {
-    // Image* loadFromXPM2(const std::string& file) {
+    Image* loadFromXPM2(const std::string& file) {
 
     //     std::ifstream inputFile(file);
     //     if (!inputFile) {
@@ -41,10 +41,11 @@ namespace prog {
 
     //     Image* newImage = new Image(widthImg, heightImg);
     //     return newImage;
-    // }
+        return nullptr;
+    }
 
-    // void saveToXPM2(const std::string& file, const Image* image) {
+    void saveToXPM2(const std::string& file, const Image* image) {
         
-    // }
+    }
     
 }

@@ -76,320 +76,217 @@ namespace prog // Define um namespace chamado "prog"
   // Transforms each individual pixel (r, g, b) to (255-r,255-g,255-b)
   void Image::invert()
   {
-    for (int i = 0; i < width_; i++)
+    for (int i = 0; i < width_; i++) // Percorre cada coluna da imagem
     {
-      for (int j = 0; j < height_; j++)
+      for (int j = 0; j < height_; j++) // Percorre cada linha da imagem
       {
-        pixels[i][j].invert();
+        pixels[i][j].invert(); // Inverte as cores do pixel atual
       }
     }
   }
 
+  // Transforma cada pixel individual (r, g, b) para a escala de cinza
   void Image::to_gray_scale()
   {
-    for (int i = 0; i < width_; i++)
+    for (int i = 0; i < width_; i++) // Percorre cada coluna da imagem
     {
-      for (int j = 0; j < height_; j++)
+      for (int j = 0; j < height_; j++) // Percorre cada linha da imagem
       {
-        pixels[i][j].to_gray_scale();
+        pixels[i][j].to_gray_scale();  // Converte o pixel atual para escala de cinza
       }
     }
   }
 
+  // Substitui cada ocorrência da cor 'a' pela cor 'b'
   void Image::replace(const Color &a, const Color &b)
   {
+    for (int i = 0; i < width_; i++) // Percorre cada coluna da imagem
+    {
+      for (int j = 0; j < height_; j++) // Percorre cada linha da imagem
+      {
+        if (pixels[i][j] == a) // Verifica se o pixel atual é igual à cor 'a'
+          pixels[i][j] = b; // Substitui o pixel atual pela cor 'b'
+      }
+    }
+  }
+
+  // Preenche uma região retangular com a cor especificada
+  void Image::fill(int x_, int y_, int w, int h, const Color &c)
+  {
+    for (int x = 0; x < width_; x++) // Percorre cada coluna da imagem
+    {
+      for (int y = 0; y < height_; y++) // Percorre cada linha da imagem
+      {
+        if (x >= x_ && x < x_ + w && y >= y_ && y < y_ + h) // Verifica se o pixel atual está dentro da região retangular especificada
+        {
+          pixels[x][y] = c; // Preenche o pixel atual com a cor 'c'
+        }
+      }
+    }
+  }
+
+
+  // Realiza uma reflexão horizontal da imagem
+  void Image::h_mirror()
+  {
+    int halfWidth = width_ / 2; // Obtém a metade da largura da imagem
+    int height = height_; // Obtém a altura da imagem
+
+    for (int x = 0; x < halfWidth; x++) // Percorre até a metade da largura da imagem
+    {
+      for (int y = 0; y < height; y++) // Percorre toda a altura da imagem
+      {
+        int mirroredX = width_ - 1 - x; // Calcula a posição refletida horizontalmente
+        Color temp = pixels[x][y]; // Armazena temporariamente o valor do pixel original
+        pixels[x][y] = pixels[mirroredX][y]; // Substitui o pixel original pelo pixel refletido
+        pixels[mirroredX][y] = temp; // Substitui o pixel refletido pelo valor temporário
+      }
+    }
+  }
+
+
+  // Realiza uma reflexão vertical da imagem
+  void Image::v_mirror()
+  {
+    int width = width_; // Obtém a largura da imagem
+    int halfHeight = height_ / 2; // Obtém a metade da altura da imagem
+
+    for (int x = 0; x < width; x++) // Percorre toda a largura da imagem
+    {
+      for (int y = 0; y < halfHeight; y++) // Percorre até a metade da altura da imagem
+      {
+        int mirroredY = height_ - 1 - y; // Calcula a posição refletida verticalmente
+        Color temp = pixels[x][y]; // Armazena temporariamente o valor do pixel original
+        pixels[x][y] = pixels[x][mirroredY]; // Substitui o pixel original pelo pixel refletido
+        pixels[x][mirroredY] = temp; // Substitui o pixel refletido pelo valor temporário
+      }
+    }
+  }
+
+
+  //Implementada no ficheiro Script.cpp.
+  void Image::add(const Image& img2, const Color& neutral, int x, int y) {  }
+
+
+  // Recorta a imagem atual para uma região retangular especificada por (x, y, w, h)
+  void Image::crop(int x, int y, int w, int h)
+  {
+    // Cria uma nova matriz de pixels para a imagem recortada
+    Color **croppedPixels = new Color *[w];
+
+    // Aloca memória para a matriz de pixels da imagem recortada
+    for (int i = 0; i < w; i++)
+    {
+      croppedPixels[i] = new Color[h];
+    }
+
+    // Copia os pixels da região retangular especificada para a matriz de pixels recortada
+    for (int i = 0; i < w; i++)
+    {
+      for (int j = 0; j < h; j++)
+      {
+        croppedPixels[i][j] = pixels[x + i][y + j];
+      }
+    }
+
+    // Libera a memória ocupada pela matriz de pixels original
+    for (int i = 0; i < width_; i++)
+    {
+      delete[] pixels[i];
+    }
+    delete[] pixels;
+
+    // Atualiza a largura e altura da imagem para as dimensões do recorte
+    width_ = w;
+    height_ = h;
+
+    // Atualiza a matriz de pixels para a matriz recortada
+    pixels = croppedPixels;
+  }
+
+
+  // Rotaciona a imagem atual em 90 graus para a esquerda
+  void Image::rotate_left()
+  {
+    // Cria uma nova matriz de pixels para a imagem rotacionada
+    Color **rotatedPixels = new Color *[height_];
+
+    // Aloca memória para a matriz de pixels da imagem rotacionada
+    for (int i = 0; i < height_; i++)
+    {
+      rotatedPixels[i] = new Color[width_];
+    }
+
+    // Copia os pixels da imagem original para a matriz de pixels rotacionada
     for (int i = 0; i < width_; i++)
     {
       for (int j = 0; j < height_; j++)
       {
-        if (pixels[i][j] == a)
-          pixels[i][j] = b;
+        rotatedPixels[j][width_ - i - 1] = pixels[i][j];
       }
     }
+
+    // Libera a memória ocupada pela matriz de pixels original
+    for (int i = 0; i < width_; i++)
+    {
+      delete[] pixels[i];
+    }
+    delete[] pixels;
+
+    // Atualiza a largura e altura da imagem trocando os valores
+    int temp = width_;
+    width_ = height_;
+    height_ = temp;
+
+    // Atualiza a matriz de pixels para a matriz rotacionada
+    pixels = rotatedPixels;
   }
 
-  void Image::fill(int x_, int y_, int w, int h, const Color &c)
+
+  // Rotaciona a imagem atual em 90 graus para a direita
+  void Image::rotate_right()
   {
-    for (int x = 0; x < width_; x++)
+    // Cria uma nova matriz de pixels para a imagem rotacionada
+    Color **rotatedPixels = new Color *[height_];
+
+    // Aloca memória para a matriz de pixels da imagem rotacionada
+    for (int i = 0; i < height_; i++)
     {
-      for (int y = 0; y < height_; y++)
+      rotatedPixels[i] = new Color[width_];
+    }
+
+    // Copia os pixels da imagem original para a matriz de pixels rotacionada
+    for (int i = 0; i < width_; i++)
+    {
+      for (int j = 0; j < height_; j++)
       {
-        if (x >= x_ && x < x_ + w && y >= y_ && y < y_ + h)
-        {
-          pixels[x][y] = c;
-        }
+        rotatedPixels[height_ - j - 1][i] = pixels[i][j];
       }
     }
+
+    // Libera a memória ocupada pela matriz de pixels original
+    for (int i = 0; i < width_; i++)
+    {
+      delete[] pixels[i];
+    }
+    delete[] pixels;
+
+    // Atualiza a largura e altura da imagem trocando os valores
+    int temp = width_;
+    width_ = height_;
+    height_ = temp;
+
+    // Atualiza a matriz de pixels para a matriz rotacionada
+    pixels = rotatedPixels;
   }
 
-  void Image::h_mirror()
-  {
-    int halfWidth = width_ / 2;
-    int height = height_;
+  //Implementada no ficheiro Script.cpp.
+  void Image::median_filter(int ws) { }
 
-    for (int x = 0; x < halfWidth; x++)
-    {
-      for (int y = 0; y < height; y++)
-      {
-        int mirroredX = width_ - 1 - x;
 
-        // Store the pixel at (x, y) in a temporary variable
-        Color temp = pixels[x][y];
+  void Image::xpm2_open(const std::string& filename) { }
 
-        // Copy the pixel from the mirrored position to (x, y)
-        pixels[x][y] = pixels[mirroredX][y];
-
-        // Copy the pixel from the temporary variable to the mirrored position
-        pixels[mirroredX][y] = temp;
-      }
-    }
-  }
-
-  void Image::v_mirror()
-{
-    int width = width_;
-    int halfHeight = height_ / 2;
-    
-    for (int x = 0; x < width; x++)
-    {
-        for (int y = 0; y < halfHeight; y++)
-        {
-            int mirroredY = height_ - 1 - y;
-            
-            // Store the pixel at (x, y) in a temporary variable
-            Color temp = pixels[x][y];
-            
-            // Copy the pixel from the mirrored position to (x, y)
-            pixels[x][y] = pixels[x][mirroredY];
-            
-            // Copy the pixel from the temporary variable to the mirrored position
-            pixels[x][mirroredY] = temp;
-        }
-    }
-}
-
-void Image::add(const Image& img2, const Color& neutral, int x, int y)
-    {
-        if(pixels[x][y] != neutral)
-        {
-            pixels[x][y] = img2.pixels[x][y];
-        }
-    }
-
-void Image::crop(int x, int y, int w, int h){
   
-  // Create a new temporary array for the cropped image
-  Color **croppedPixels = new Color *[w];
-
-  for (int i = 0; i < w; i++){
-    croppedPixels[i] = new Color[h];
-  }
-
-  // Copy the pixels within the specified crop area to the temporary array
-  for (int i = 0; i < w; i++){
-    for (int j = 0; j < h; j++){
-      croppedPixels[i][j] = pixels[x + i][y + j];
-    }
-  }
-
-  // Deallocate the memory of the original image
-  for (int i = 0; i < width_; i++){
-    delete[] pixels[i];
-  }
-  delete[] pixels;
-
-  // Update the width and height of the image
-  width_ = w;
-  height_ = h;
-
-  // Assign the cropped pixels to the image
-  pixels = croppedPixels;
-}
-
-void Image::rotate_left(){
-  
-  // Create a new temporary array for the rotated image
-  Color **rotatedPixels = new Color *[height_];
-
-  for (int i = 0; i < height_; i++){
-    rotatedPixels[i] = new Color[width_];
-  }
-
-  // Perform the rotation by copying the pixels in the desired order
-  for (int i = 0; i < width_; i++)
-  {
-    for (int j = 0; j < height_; j++){
-      rotatedPixels[j][width_ - i - 1] = pixels[i][j];
-    }
-  }
-
-  // Deallocate the memory of the original image
-  for (int i = 0; i < width_; i++){
-    delete[] pixels[i];
-  }
-
-  delete[] pixels;
-
-  // Update the width and height of the image
-  int temp = width_;
-  width_ = height_;
-  height_ = temp;
-
-  // Assign the rotated pixels to the image
-  pixels = rotatedPixels;
-}
-
-void Image::rotate_right(){
-
-  // Create a new temporary array for the rotated image
-  Color **rotatedPixels = new Color *[height_];
-
-  for (int i = 0; i < height_; i++){
-    rotatedPixels[i] = new Color[width_];
-  }
-
-  // Perform the rotation by copying the pixels in the desired order
-  for (int i = 0; i < width_; i++)
-  {
-    for (int j = 0; j < height_; j++){
-      rotatedPixels[height_ - j - 1][i] = pixels[i][j];
-    }
-  }
-
-  // Deallocate the memory of the original image
-  for (int i = 0; i < width_; i++){
-    delete[] pixels[i];
-  }
-
-  delete[] pixels;
-
-  // Update the width and height of the image
-  int temp = width_;
-  width_ = height_;
-  height_ = temp;
-
-  // Assign the rotated pixels to the image
-  pixels = rotatedPixels;
-}
-
-// void Image::median_filter(int ws){
-// // void medianFilter(Image& image, int ws) {
-//   int width = image->width();
-//   int height = image->height();
-//   int halfSize = ws / 2;
-
-//   Image aux = new* Image(image->width(), image->height()); // Cria uma imagem temporária para armazenar os valores filtrados
-
-//   for (int x = 0; x < width; x++) {
-
-//     for (int y = 0; y < height; y++) {
-      
-//       int minX = std::max(0, x - halfSize);
-//       int maxX = std::min(width - 1, x + halfSize);
-//       int minY = std::max(0, y - halfSize);
-//       int maxY = std::min(height - 1, y + halfSize);
-
-//       std::vector<int> redValues;
-//       std::vector<int> greenValues;
-//       std::vector<int> blueValues;
-
-//       // Coleta os valores dos canais R, G e B dos pixels na vizinhança
-//       for (int nx = minX; nx <= maxX; nx++) {
-//         for (int ny = minY; ny <= maxY; ny++) {
-//           Color pixel = image.getPixel(nx, ny);
-//           redValues.push_back(pixel.getRed());
-//           greenValues.push_back(pixel.getGreen());
-//           blueValues.push_back(pixel.getBlue());
-//         }
-//       }
-
-//       // Ordena os valores dos canais R, G e B
-//       std::sort(redValues.begin(), redValues.end());
-//       std::sort(greenValues.begin(), greenValues.end());
-//       std::sort(blueValues.begin(), blueValues.end());
-
-//       // Obtém o valor mediano para cada canal
-//       int medianRed = redValues[redValues.size() / 2];
-//       int medianGreen = greenValues[greenValues.size() / 2];
-//       int medianBlue = blueValues[blueValues.size() / 2];
-
-//       // Atribui o valor mediano para o pixel na imagem temporária
-//       Color medianColor(medianRed, medianGreen, medianBlue);
-//       tempImage.setPixel(x, y, medianColor);
-//     }
-//   }
-
-//   // Copia os valores filtrados de volta para a imagem original
-//   image = tempImage;
-// }
-
-// AQUIIII
-
-//   // Calculate the offset for the window
-//   int offset = ws / 2;
-
-//   // Create a temporary image to store the filtered result
-//   Image filteredImage(width_, height_);
-
-//   // Apply the median filter to each pixel
-//   for (int y = 0; y < height_; y++){
-//     for (int x = 0; x < width_; x++){
-//       std::vector<Color> windowColors;
-
-//       // Collect the colors within the window
-//       for (int j = -offset; j <= offset; j++){
-//         for (int i = -offset; i <= offset; i++){
-//           int neighborX = x + i;
-//           int neighborY = y + j;
-
-//           // Check if the neighbor pixel is within bounds
-//           if (neighborX >= 0 && neighborX < width_ && neighborY >= 0 && neighborY < height_){
-//             windowColors.push_back(pixels[neighborX][neighborY]);
-//           }
-//         }
-//       }
-
-//       // Sort the colors within the window
-//       std::sort(windowColors.begin(), windowColors.end());
-
-//       // Get the median color
-//       Color medianColor = windowColors[windowColors.size() / 2];
-
-//       // Assign the median color to the corresponding pixel in the filtered image
-//       filteredImage.pixels[x][y] = medianColor;
-//     }
-//   }
-
-//   // Copy the filtered image back to the original image
-//   *this = filteredImage;
-// }
-
-// void Image::xpm2_open(const std::string& filename){
-//     // Load the image from the XPM2 file
-//     Image* newImage = loadFromXPM2(filename);
-
-//     // Check if loading was successful
-//     if (newImage != nullptr)
-//     {
-//         // Delete the current image data
-//         for (int i = 0; i < width_; i++)
-//         {
-//             delete[] pixels[i];
-//         }
-//         delete[] pixels;
-
-//         // Assign the new image to the current object
-//         width_ = newImage->width();
-//         height_ = newImage->height();
-//         pixels = newImage->pixels;
-//     }
-    
-//     // Deallocate the temporary image object
-//     delete newImage;
-// }
-
-// void Image::xpm2_save(const std::string& filename) {
-    
-// }
+  void Image::xpm2_save(const std::string& filename) { }
 
 }
