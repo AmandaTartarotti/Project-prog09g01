@@ -283,65 +283,53 @@ namespace prog
     //Funcionalidades avançadas.
 
     //Aplica um filtro de média com uma ws mínima de tamanha 3.
-    void Script::median_filter() {
+    void Script::median_filter()
+    {
         int ws;
-        input >> ws; // Lê o tamanho da janela de entrada
+        input >> ws; // Lê o tamanho da janela 
 
-        int w = image->width();
-        int h = image->height();
-        Image* newImage = new Image(w, h); // Cria uma nova imagem para armazenar o resultado filtrado
+        int w = image->width(); // Obtém a largura da imagem
+        int h = image->height(); // Obtém a altura da imagem
+        Image *newImage = new Image(w, h); // Cria uma nova imagem com a mesma largura e altura da imagem original
 
-        // Percorre cada pixel na imagem
-        for (int y = 0; y < h; y++) {
-            for (int x = 0; x < w; x++) {
-                std::vector<int> reds;
-                std::vector<int> greens;
-                std::vector<int> blues;
+        for (int y = 0; y < h; y++) // Loop pelas linhas da imagem
+        {
+            for (int x = 0; x < w; x++) // Loop pelas colunas da imagem
+            {
+                std::vector<int> reds, greens, blues; // Vetores para armazenar os valores dos pixels vizinhos
 
-                // Percorre os pixels vizinhos dentro da janela
-                for (int ny = std::max(0, y - ws / 2); ny <= std::min(h - 1, y + ws / 2); ny++) {
-                    for (int nx = std::max(0, x - ws / 2); nx <= std::min(w - 1, x + ws / 2); nx++) {
-                        Color& c = image->at(nx, ny);
-                        reds.push_back(c.red());
-                        greens.push_back(c.green());
-                        blues.push_back(c.blue());
+                // Loop para percorrer os pixels vizinhos
+                for (int ny = std::max(0, y - ws / 2); ny <= std::min(h - 1, y + ws / 2); ny++)
+                {
+                    for (int nx = std::max(0, x - ws / 2); nx <= std::min(w - 1, x + ws / 2); nx++)
+                    {
+                        Color &c = image->at(nx, ny); // Obtém a cor do pixel vizinho
+                        reds.push_back(c.red()); // Adiciona o valor do canal vermelho ao vetor reds
+                        greens.push_back(c.green()); // Adiciona o valor do canal verde ao vetor greens
+                        blues.push_back(c.blue()); // Adiciona o valor do canal azul ao vetor blues
                     }
                 }
 
-                // Ordena os canais de cor separadamente
-                std::sort(reds.begin(), reds.end());
-                std::sort(greens.begin(), greens.end());
-                std::sort(blues.begin(), blues.end());
+                // Função para calcular a mediana de um vetor
+                auto median = [](std::vector<int> &channel) {
+                    std::sort(channel.begin(), channel.end()); // Ordena o vetor em ordem crescente
+                    int size = channel.size();
+                    return (size % 2 != 0) ? channel[size / 2] : (channel[size / 2] + channel[size / 2 - 1]) / 2; // Retorna a mediana do vetor
+                };
 
-                // Encontra os valores medianos das cores para cada canal
-                int size = reds.size();
-                int medianRed, medianGreen, medianBlue;
-
-                if (size % 2 != 0) {
-                    medianRed = reds[size / 2];
-                    medianGreen = greens[size / 2];
-                    medianBlue = blues[size / 2];
-                } else {
-                    medianRed = (reds[size / 2] + reds[size / 2 - 1]) / 2;
-                    medianGreen = (greens[size / 2] + greens[size / 2 - 1]) / 2;
-                    medianBlue = (blues[size / 2] + blues[size / 2 - 1]) / 2;
-                }
-
-                // Define os valores de cor medianos para o pixel atual na nova imagem
-                Color& newPixel = newImage->at(x, y);
-                newPixel.red() = medianRed;
-                newPixel.green() = medianGreen;
-                newPixel.blue() = medianBlue;
+                Color &newPixel = newImage->at(x, y); // Obtém o pixel correspondente na nova imagem
+                newPixel.red() = median(reds); // Define o valor de vermelho do novo pixel como a mediana em reds
+                newPixel.green() = median(greens); // Define o valor verde do novo pixel como a mediana em greens
+                newPixel.blue() = median(blues); // Define o valor azul do novo pixel como a mediana em blues
             }
         }
 
-        // Limpeza
-        delete image; // Libera a memória alocada para a imagem original
-        image = newImage; // Atualiza a referência para a nova imagem filtrada
+        delete image; // Libera a memória
+        image = newImage; // Atribui a nova imagem à variável 'image'
     }
 
 
-
+    //Advanced Functions não implementadas (mas tentamos muito :c )
     void Script::xpm2_open()
     {
         std::string filename;

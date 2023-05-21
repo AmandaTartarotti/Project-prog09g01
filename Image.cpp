@@ -92,7 +92,6 @@ namespace prog // Define um namespace chamado "prog"
     }
   }
 
-
   // Transforma cada pixel individual (r, g, b) para a escala de cinza
   void Image::to_gray_scale()
   {
@@ -104,7 +103,6 @@ namespace prog // Define um namespace chamado "prog"
       }
     }
   }
-
 
   // Substitui cada ocorrência da cor 'a' pela cor 'b'
   void Image::replace(const Color &a, const Color &b)
@@ -120,7 +118,6 @@ namespace prog // Define um namespace chamado "prog"
       }
     }
   }
-
 
   // Preenche uma região retangular com a cor especificada
   void Image::fill(int x_, int y_, int w, int h, const Color &c)
@@ -229,7 +226,7 @@ namespace prog // Define um namespace chamado "prog"
       rotatedPixels[i] = new Color[width_];
     }
 
-    // Copia os pixels da imagem original para a matriz de pixels rotacionada, realizando a rotação
+    // Copia os pixels da imagem original para a matriz de pixels rotacionada
     for (int i = 0; i < width_; i++)
     {
       for (int j = 0; j < height_; j++)
@@ -267,7 +264,7 @@ namespace prog // Define um namespace chamado "prog"
       rotatedPixels[i] = new Color[width_];
     }
 
-    // Copia os pixels da imagem original para a matriz de pixels rotacionada, realizando a rotação
+    // Copia os pixels da imagem original para a matriz de pixels rotacionada
     for (int i = 0; i < width_; i++)
     {
       for (int j = 0; j < height_; j++)
